@@ -1,0 +1,41 @@
+{% extends "HBPCToolsBundle:Layouts:layout.html.twig" %}
+{% block title %}
+    Catégories - {{ parent() }}
+{% endblock %}
+{% block hbpctools_body %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>Catégories</h1>
+        <p>Ceci est la page d'accueil :)</p>
+    </div>
+    <div class="row">
+        <div id="content" class="col-md-12">
+            {# <button type="button" class="btn btn-primary"> << Retour</button> #}
+            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
+        </div>
+        <div id="content" class="col-md-12">
+            <table class="table table-striped"> 
+                <thead> 
+                    <tr> 
+                        <th>#</th> 
+                        <th>Nom</th> 
+                        <th>Actions</th> 
+                    </tr> 
+                </thead> 
+                <tbody> 
+                    {% for cat in categories %}
+                        <tr> 
+                            <th scope="row">{{ cat.id }}</th> 
+                            <td>{{ cat.titre }}</td> 
+                            <td>
+                                <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button>
+                            </td> 
+                        </tr> 
+                    {% endfor %}
+                </tbody> 
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

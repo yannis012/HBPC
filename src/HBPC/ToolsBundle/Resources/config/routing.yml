@@ -1,0 +1,19 @@
+hbpc_tools_homepage:
+    path:     /
+    defaults: { _controller: HBPCToolsBundle:Home:index }
+hbpc_tools_categories:
+    path:     /categories
+    defaults: { _controller: HBPCToolsBundle:Categories:index }
+hbpc_tools_composants:
+    path:     /composants
+    defaults: { _controller: HBPCToolsBundle:Composants:index }
+hbpc_tools_config:
+    path:     /config
+    defaults: { _controller: HBPCToolsBundle:Config:index }
+hbpc_tools_config_view:
+    path:     /config/{id}
+    defaults: 
+        _controller: HBPCToolsBundle:Config:view
+    requirements:
+        id: \d+
+

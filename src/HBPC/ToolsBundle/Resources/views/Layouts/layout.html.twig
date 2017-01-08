@@ -1,0 +1,10 @@
+{% extends "::layout.html.twig" %}
+{% block title %}
+    {{ parent() }} Tools
+{% endblock %}
+
+{% block body %}
+{{ include("HBPCToolsBundle:Menus:header.html.twig") }}
+    {% block hbpctools_body %}
+    {% endblock %}
+{% endblock %}
