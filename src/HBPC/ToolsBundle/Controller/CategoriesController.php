@@ -16,4 +16,8 @@ class CategoriesController extends Controller{
             'categories' => $cat
         ));
     }
+    
+    public function addAction() {
+        return $this->render('HBPCToolsBundle:Pages:categories_add.html.twig');
+    }
 }

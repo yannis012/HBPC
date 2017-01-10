@@ -6,12 +6,13 @@
 <div class="container">
     <div class="jumbotron">
         <h1>Catégories</h1>
-        <p>Ceci est la page d'accueil :)</p>
     </div>
     <div class="row">
         <div id="content" class="col-md-12">
-            {# <button type="button" class="btn btn-primary"> << Retour</button> #}
-            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
+            <h2>Liste</h2>
+            <a href="{{ path('hbpc_tools_categories_new') }}">
+                <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
+            </a>
         </div>
         <div id="content" class="col-md-12">
             <table class="table table-striped"> 
