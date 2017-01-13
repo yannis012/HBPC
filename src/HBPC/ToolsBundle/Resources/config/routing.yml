@@ -6,6 +6,22 @@ hbpc_tools_categories:
     path:     /categories
     defaults: 
         _controller: HBPCToolsBundle:Categories:index
+hbpc_tools_categories_new:
+    path:   /categories/add
+    defaults:
+        _controller: HBPCToolsBundle:Categories:add
+hbpc_tools_categories_view:
+    path:   /categories/{id}
+    defaults:
+        _controller: HBPCToolsBundle:Categories:view
+    requirements:
+         id: \d+
+hbpc_tools_categories_remove:
+    path:   /categories/{id}/remove
+    defaults:
+        _controller: HBPCToolsBundle:Categories:remove
+    requirements:
+         id: \d+
 hbpc_tools_composants:
     path:     /composants
     defaults: 
@@ -20,8 +36,5 @@ hbpc_tools_config_view:
         _controller: HBPCToolsBundle:Config:view
     requirements:
         id: \d+
-hbpc_tools_categories_new:
-    path:   /categories/add
-    defaults:
-        _controller: HBPCToolsBundle:Categories:add
+
 

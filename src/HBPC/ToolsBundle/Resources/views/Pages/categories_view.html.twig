@@ -1,38 +1,41 @@
 {% extends "HBPCToolsBundle:Layouts:layout.html.twig" %}
 {% block title %}
-    Configuration - {{ parent() }}
+    {{ categorie.nom }} - Catégories - {{ parent() }}
 {% endblock %}
 {% block hbpctools_body %}
 <div class="container">
     <div class="jumbotron">
-        <h1>Configurations</h1>
+        <h1>Catégorie {{ categorie.nom }}</h1>
     </div>
     <div class="row">
+        <div id="content" class="col-md-12">
+            <h2>Composants dans cette catégorie</h2>
+            <a href="{{ path('hbpc_tools_categories') }}"><button type="button" class="btn btn-primary"> << Retour</button></a>
+            <a href="{{ path('hbpc_tools_categories') }}"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Ajouter</button></a>
+        </div>
         <div id="content" class="col-md-12">
             <table class="table table-striped"> 
                 <thead> 
                     <tr> 
                         <th>#</th> 
                         <th>Nom</th> 
-                        <th>Prix de vente TTC</th> 
                         <th>Actions</th> 
                     </tr> 
                 </thead> 
                 <tbody> 
-                    {% for config in configurations %}
+                    {% for comp in composants %}
                         <tr> 
-                            <th scope="row">{{ config.id }}</th> 
-                            <td><a href="{{ path('hbpc_tools_config_view', { 'id': config.id }) }}">{{ config.nom }}</a></td> 
-                            <td>{{ config.prix }}</td> 
+                            <th scope="row">{{ comp.id }}</th> 
+                            <td><a href="">{{ comp.nom }}</a></td> 
+                            <td>{{ comp.getPrixVenteTTC }}</td>
                             <td>
                                 <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                                 <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button>
                             </td> 
                         </tr> 
-                        {% else %}
+                    {% else %}
                             <tr>
-                                <th>Pas de configurations !</th>
-                                <td></td>
+                                <th>Pas de composants dans cette catégorie !</th>
                                 <td></td>
                                 <td></td>
                             </tr>

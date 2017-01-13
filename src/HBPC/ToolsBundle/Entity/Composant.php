@@ -77,6 +77,13 @@ class Composant
     private $stock;
 
 
+    public function getPrixVenteTTC(){
+        return ($this->prixVente)*1.2;
+    }
+    
+    public function getPrixAchatTTC(){
+        return ($this->prixAchat)*1.2;
+    }
     /**
      * Get id
      *
@@ -87,6 +94,9 @@ class Composant
         return $this->id;
     }
 
+    public function removeCategorie(){
+        $this->setCategorie(null);
+    }
     public function setCategorie(Categorie $categorie)
     {
         $this->categorie = $categorie;
