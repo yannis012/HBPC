@@ -13,99 +13,81 @@ use Doctrine\ORM\Mapping as ORM;
 class Composant
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
+    
     private $id;
-
     /**
-     * @ORM\ManyToOne(targetEntity="HBPC\ToolsBundle\Entity\Categorie")
+     * @ORM\ManyToOne(targetEntity="HBPC\ToolsBundle\Entity\Categorie", inversedBy="composants")
      * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
     
     /**
-     * @var string
-     *
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="reference", type="string", length=100)
      */
     private $reference;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="prix_vente", type="decimal", precision=10, scale=2)
      */
     private $prixVente;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="prix_achat", type="decimal", precision=10, scale=2)
      */
     private $prixAchat;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="fournisseur", type="string", length=100)
      */
     private $fournisseur;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="fournisseur_ref", type="string", length=100)
      */
     private $fournisseurRef;
     
     /**
-     * @var int
-     *
-     * @ORM\Column(name="stock", type="smallint")
+     * @ORM\Column(name="stock", nullable=true, type="smallint", options={"default":0})
      */
     private $stock;
 
-
     public function getPrixVenteTTC(){
-        return ($this->prixVente)*1.2;
+        return round(($this->prixVente)*1.2, 2);
     }
     
     public function getPrixAchatTTC(){
-        return ($this->prixAchat)*1.2;
+        return round(($this->prixAchat)*1.2, 2);
     }
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
+    
+    public function getMargeTTC(){
+        return round(100-(($this->getPrixAchatTTC()*100)/$this->getPrixVenteTTC()), 1);
+    }
+    public function getCategorie()
     {
-        return $this->id;
+        return $this->categorie;
     }
-
-    public function removeCategorie(){
-        $this->setCategorie(null);
-    }
+    
     public function setCategorie(Categorie $categorie)
     {
         $this->categorie = $categorie;
         return $this;
     }
     
-    public function getCategorie()
+    /**
+     * @return int
+     */
+    public function getId()
     {
-        return $this->categorie;
+        return $this->id;
     }
     /**
      * Set nom

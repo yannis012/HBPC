@@ -1,0 +1,58 @@
+{% extends "HBPCToolsBundle:Layouts:layout.html.twig" %}
+{% block title %}
+    Configuration > Catégories - {{ parent() }}
+{% endblock %}
+{% block hbpctools_body %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>Configurations <small>Gammes</small></h1>
+    </div>
+    <div class="row">
+        <div id="content" class="col-md-12">
+            <h2>Gammes disponibles</h2>
+            <p>
+                <a href="{{ path('hbpc_tools_gamme_new') }}">
+                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Ajouter une gamme</button>
+                </a>
+            </p>
+            {% for message in app.session.flashbag.get('notice') %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div id="content" class="col-md-12">
+            <table class="table table-striped"> 
+                <thead> 
+                    <tr> 
+                        <th>#</th> 
+                        <th>Nom</th>
+                        <th>Actions</th>
+                    </tr> 
+                </thead> 
+                <tbody> 
+                    {% for cat in categories %}
+                        <tr> 
+                            <th scope="row">{{ cat.id }}</th> 
+                            <td><a href="{{ path('hbpc_tools_gamme_view', { 'id': cat.id }) }}">{{ cat.nom }}</a></td>
+                            <td>
+                                <a href="{{ path('hbpc_tools_gamme_edit', { 'id': cat.id }) }}">
+                                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button></a>
+                                    <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                            </td> 
+                        </tr> 
+                        {% else %}
+                            <tr>
+                                <th>Pas de catégories pour les configurations !</th>
+                                <td></td>
+                            </tr>
+                    {% endfor %}
+                </tbody> 
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

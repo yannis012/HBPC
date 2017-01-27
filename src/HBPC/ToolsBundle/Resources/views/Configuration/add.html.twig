@@ -5,18 +5,15 @@
 {% block hbpctools_body %}
 <div class="container">
     <div class="jumbotron">
-        <h1>Catégories</h1>
+        <h1>Composants <small>Catégories</small></h1>
     </div>
     <div class="row">
         <div id="content" class="col-md-12">
-            <h2>Ajouter une catégorie</h2>
+            <h2>Ajouter une configuration</h2>
             <a href="{{ path('hbpc_tools_categories') }}"><button type="button" class="btn btn-primary"> << Retour</button></a>
         </div>
         <div id="content" class="col-md-12">
             {{ include("HBPCToolsBundle:Formulaires:form_categories.html.twig") }}
-            <form action="" method="post">
-                <input type="submit" value="Add" /> 
-            </form>
         </div>
     </div>
 </div>

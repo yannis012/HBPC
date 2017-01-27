@@ -3,6 +3,8 @@
 namespace HBPC\ToolsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Configuration
@@ -12,19 +14,23 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Configuration
 {
-    
-    /**
-    * @ORM\ManyToMany(targetEntity="HBPC\ToolsBundle\Entity\Composant", cascade={"persist"})
-    */
-    private $composants;
-    
+    // Constructeur
     public function __construct()
     {
       $this->composants = new ArrayCollection();
     }
+    
     /**
-     * @var int
-     *
+     * @ORM\ManyToMany(targetEntity="HBPC\ToolsBundle\Entity\Composant", cascade={"persist"})
+     */
+    private $composants;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="HBPC\ToolsBundle\Entity\Gamme")
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $gamme;
+    /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -47,65 +53,99 @@ class Configuration
      */
     private $maj;
 
+ 
+    
+    public function margePC(){
+        return round($this->prix-$this->achatsComposants()-$this->commissionCB()-$this->manutention(), 2);
+    }
+    
+    public function margePCPourcent(){
+        return round($this->margePC()*100/$this->prix);
+    }
+    
+    public function margeComposants(){
+        $vente=0;
+        foreach($this->getComposants() as $c){
+            $vente+=$c->getPrixVenteTTC();
+        }
+        return $vente-$this->achatsComposants()." €";
+    }
+    public function margeComposantsPourcent(){
+        if($this->venteComposants() != 0){
+            return round(100-$this->achatsComposants()*100/$this->venteComposants(), 2);
+        }else{
+            return 0;
+        }
+    }
+    
+    public function commissionCB(){
+        return $this->prix*0.008;
+    }
+    
+    public function manutention(){
+        return 10;
+    }
+    
+    public function prixVenteHT(){
+        return $this->prix/1.2;
+    }
+    
+    public function achatsComposants(){
+        $total=0;
+        foreach($this->getComposants() as $c){
+            $total+=$c->getPrixAchatTTC();
+        }
+        return $total;
+    }
+    public function venteComposants(){
+        $total=0;
+        foreach($this->getComposants() as $c){
+            $total+=$c->getPrixVenteTTC();
+        }
+        return $total;
+    }
+    
     public function getComposants()
     {
         return $this->composants;
-    }
-    
-    public function getComposantsByCategorie(Categorie $cat){
-        
     }
     
     public function addComposant(Composant $composant)
     {
         $this->composant[] = $composant;
     }
+    
     public function removeComposant(Composant $composant)
     {
         $this->composants->removeElement($composant);
     }
     
-    /**
-     * Get id
-     *
-     * @return int
-     */
+    public function setGamme(Gamme $gam){
+        $this->gamme = $gam;
+        return $this;
+    }
+    
+    public function getGamme(){
+        return $this->gamme;
+    }
+    
     public function getId()
     {
         return $this->id;
     }
-
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     *
-     * @return Configurations
-     */
+    
     public function setNom($nom)
     {
         $this->nom = $nom;
 
         return $this;
     }
-
-    /**
-     * Get nom
-     *
-     * @return string
-     */
+    
     public function getNom()
     {
         return $this->nom;
     }
 
-    /**
-     * Set prix
-     *
-     * @param string $prix
-     *
-     * @return Configurations
-     */
     public function setPrix($prix)
     {
         $this->prix = $prix;
@@ -123,13 +163,6 @@ class Configuration
         return $this->prix;
     }
 
-    /**
-     * Set maj
-     *
-     * @param boolean $maj
-     *
-     * @return Configurations
-     */
     public function setMaj($maj)
     {
         $this->maj = $maj;
@@ -137,24 +170,11 @@ class Configuration
         return $this;
     }
 
-    /**
-     * Get maj
-     *
-     * @return bool
-     */
     public function getMaj()
     {
         return $this->maj;
     }
     
-
-    /**
-     * Set reference
-     *
-     * @param string $reference
-     *
-     * @return Configuration
-     */
     public function setReference($reference)
     {
         $this->reference = $reference;
@@ -162,11 +182,6 @@ class Configuration
         return $this;
     }
 
-    /**
-     * Get reference
-     *
-     * @return string
-     */
     public function getReference()
     {
         return $this->reference;

@@ -11,8 +11,20 @@ namespace HBPC\ToolsBundle\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityRepository;
 
-class ConfigurationRepository extends \Doctrine\ORM\EntityRepository
-{
-    
-    
+class ConfigurationRepository extends EntityRepository
+{    
+   
+    public function findAllByConfigCustom($id){
+        
+        $qb = $this->createQueryBuilder('config')
+                    ->join('config.composants', 'compos')
+                    ->addSelect('compos')
+                    ->join('compos.categorie', 'cat')
+                    ->addSelect('cat')
+                    ->where('config.id = :id')
+                    ->setParameter('id', $id)
+                    ->orderBy('cat.position', 'ASC')
+                   ;
+        return $qb->getQuery()->getResult();
+    }
 }

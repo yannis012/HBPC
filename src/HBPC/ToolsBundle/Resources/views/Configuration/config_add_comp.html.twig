@@ -1,0 +1,22 @@
+{% extends "HBPCToolsBundle:Layouts:layout.html.twig" %}
+{% block title %}
+    {{ configuration.nom }} - {{ parent() }}
+{% endblock %}
+{% block hbpctools_body %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>{{ configuration.nom }} <small>{{ configuration.reference }}</small></h1>
+    </div>
+    <div class="row">
+        <div id="content" class="col-md-12">
+            <h2>Sélectionner les composants</h2>
+            <a href="{{ path('hbpc_tools_configuration_view', { 'id': configuration.id} ) }}"><button type="button" class="btn btn-primary"> << Retour</button></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {{ include("HBPCToolsBundle:Configuration:form_conf_add_comp.html.twig") }}
+        </div>
+    </div>
+</div>
+{% endblock %}

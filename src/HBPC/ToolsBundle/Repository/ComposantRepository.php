@@ -21,17 +21,4 @@ class ComposantRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
     
-    public function findAllByCategorie($id){
-        $qb = $this->createQueryBuilder('c');
-        $qb->where('c.id = :id')
-           ->setParameter('id', $id);
-        return $qb->getQuery()->getResult();
-    }
-    
-    public function findAllByConfig($id){
-        $qb = $this->createQueryBuilder('c');
-        $qb->where('c.id = :id')
-           ->setParameter('id', $id);
-        return $qb->getQuery()->getResult();
-    }
 }

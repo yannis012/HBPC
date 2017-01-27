@@ -1,0 +1,20 @@
+{% extends "HBPCToolsBundle:Layouts:layout.html.twig" %}
+{% block title %}
+    Editer un composant - {{ parent() }}
+{% endblock %}
+{% block hbpctools_body %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>Composants <small>Catégories</small></h1>
+    </div>
+    <div class="row">
+        <div id="content" class="col-md-12">
+            <h2>Editer une catégorie</h2>
+            <a href="{{ app.request.headers.get('referer') }}"><button type="button" class="btn btn-primary"> << Retour</button></a>
+        </div>
+        <div id="content" class="col-md-12">
+            {{ include("HBPCToolsBundle:Categorie:form_categorie.html.twig") }}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -5,35 +5,86 @@ hbpc_tools_homepage:
 hbpc_tools_categories:
     path:     /categories
     defaults: 
-        _controller: HBPCToolsBundle:Categories:index
-hbpc_tools_categories_new:
-    path:   /categories/add
+        _controller: HBPCToolsBundle:Categorie:index
+hbpc_tools_categorie_new:
+    path:   /categorie/add
     defaults:
-        _controller: HBPCToolsBundle:Categories:add
-hbpc_tools_categories_view:
-    path:   /categories/{id}
+        _controller: HBPCToolsBundle:Categorie:add
+hbpc_tools_categorie_view:
+    path:   /categorie/{id}
     defaults:
-        _controller: HBPCToolsBundle:Categories:view
+        _controller: HBPCToolsBundle:Categorie:view
     requirements:
          id: \d+
-hbpc_tools_categories_remove:
-    path:   /categories/{id}/remove
+hbpc_tools_categorie_edit:
+    path:   /categorie/{id}/edit
     defaults:
-        _controller: HBPCToolsBundle:Categories:remove
+        _controller: HBPCToolsBundle:Categorie:edit
     requirements:
          id: \d+
-hbpc_tools_composants:
+hbpc_tools_categorie_remove:
+    path:   /categorie/{id}/remove
+    defaults:
+        _controller: HBPCToolsBundle:Categorie:remove
+    requirements:
+         id: \d+
+hbpc_tools_composant:
     path:     /composants
     defaults: 
-        _controller: HBPCToolsBundle:Composants:index
-hbpc_tools_config:
-    path:     /config
+        _controller: HBPCToolsBundle:Composant:index
+hbpc_tools_composant_new:
+    path:   /composant/add
+    defaults:
+        _controller: HBPCToolsBundle:Composant:add
+hbpc_tools_composant_edit:
+    path:   /composant/{id}/edit
+    defaults:
+        _controller: HBPCToolsBundle:Composant:edit
+    requirements:
+        id: \d+
+hbpc_tools_composant_remove:
+    path:   /composant/{id}/remove
+    defaults:
+        _controller: HBPCToolsBundle:Composant:remove
+    requirements:
+        id: \d+
+hbpc_tools_composant_baisse_stock:
+    path:   /composant/{id}/reduire-stock/{config}
+    defaults:
+        _controller: HBPCToolsBundle:Composant:reduireStock
+    requirements:
+        id: \d+
+        config: \d+
+hbpc_tools_gamme:
+    path:     /gamme
     defaults: 
-        _controller: HBPCToolsBundle:Config:index
-hbpc_tools_config_view:
+        _controller: HBPCToolsBundle:Gamme:index
+hbpc_tools_gamme_new:
+    path:     /gamme/add
+    defaults: 
+        _controller: HBPCToolsBundle:Gamme:add
+hbpc_tools_gamme_edit:
+    path:     /gamme/{id}/edit
+    defaults: 
+        _controller: HBPCToolsBundle:Gamme:edit
+    requirements:
+        id: \d+
+hbpc_tools_gamme_view:
+    path:     /gamme/{id}
+    defaults: 
+        _controller: HBPCToolsBundle:Configuration:viewGamme
+    requirements:
+        id: \d+
+hbpc_tools_configuration_view:
     path:     /config/{id}
     defaults: 
-        _controller: HBPCToolsBundle:Config:view
+        _controller: HBPCToolsBundle:Configuration:viewConf
+    requirements:
+        id: \d+
+hbpc_tools_configuration_add_composant:
+    path:     /config/{id}/add
+    defaults: 
+        _controller: HBPCToolsBundle:Configuration:addComp
     requirements:
         id: \d+
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Menus/header.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Formulaires/form_categories.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Controller/ComposantsController.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Pages/composant_edit.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Rubriques/categories.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Repository/ComposantRepository.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Controller/CategoriesController.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Pages/categories_view.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Entity/Categorie.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Rubriques/gamme.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Entity/Gamme.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Pages/composant_add.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Entity/Composant.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Controller/GammeController.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Rubriques/composants.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Controller/ConfigController.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Formulaires/form_conf_add_comp.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Entity/Configuration.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Rubriques/config.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Repository/ConfigurationRepository.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Pages/config_view.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Pages/categories_add.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/config/routing.yml</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Form/ComposantType.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Repository/CategorieRepository.php</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Pages/config_add_comp.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Resources/views/Formulaires/form_composants.html.twig</file>
+            <file>file:/C:/wamp64/www/HBPC/src/HBPC/ToolsBundle/Form/ConfigAddCompType.php</file>
+        </group>
+    </open-files>
+</project-private>

@@ -1,0 +1,115 @@
+{% extends "HBPCToolsBundle:Layouts:layout.html.twig" %}
+{% block title %}
+    {{ configuration.nom }} - {{ parent() }}
+{% endblock %}
+{% block hbpctools_body %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>{{ configuration.nom }} <small>{{ configuration.reference }}</small></h1>
+    </div>
+    <div class="row">
+        <div id="content" class="col-md-12">
+            <h2>Composants</h2>
+            <p>
+                <a href="{{ path('hbpc_tools_gamme_view', { 'id': configuration.gamme.id} ) }}"><button type="button" class="btn btn-primary"> << Retour</button></a>
+                <a href="{{ path('hbpc_tools_configuration_add_composant', { 'id': configuration.id }) }}"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-cog"></span> Gérer les composants</button></a>
+                <a href=""><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Editer</button></a>
+                <a href=""><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer</button></a>
+            </p>
+            {% for message in app.session.flashbag.get('notice') %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped"> 
+                <thead> 
+                    <tr> 
+                        <th>Réf. F.</th> 
+                        <th>Réf.</th> 
+                        <th>Nom</th> 
+                        <th>Prix Achat TTC</th> 
+                        <th>Prix Vente TTC</th> 
+                        <th>Stock</th> 
+                        <th>Actions</th> 
+                    </tr> 
+                </thead> 
+                <tbody> 
+                    {% for compo in configuration.composants %}
+                        <tr> 
+                            <th scope="row"><small>{{ compo.fournisseurRef }}</small></th> 
+                            <td><small>{{ compo.reference }}</small></td> 
+                            <td>{{ compo.nom }}</td> 
+                            <td>{{ compo.getPrixAchatTTC }}€</td> 
+                            <td>{{ compo.getPrixVenteTTC }}€</td> 
+                            <td>
+                                {% if compo.stock == 0 %}
+                                    <font color="red">{{ compo.stock }}</font>
+                                {% elseif compo.stock < 2 %}
+                                    <font color="orange">{{ compo.stock }}</font>
+                                {% else %}
+                                    <font color="green">{{ compo.stock }}</font>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('hbpc_tools_composant_edit', { 'id': compo.id }) }}" target="_blank">
+                                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button></a>
+                                <a href="{{ path('hbpc_tools_composant_baisse_stock', { 'id': compo.id, 'config': configuration.id }) }}">
+                                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-down"></span></button></a>
+                            </td> 
+                        {% else %}
+                            <tr>
+                                <th>Pas de composants !</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"><strong>TOTAL ACHATS :</strong></td>
+                        <td>{{ configuration.achatsComposants }} €</td>
+                        <td></td>
+                    </tr> 
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"><strong>MANUTENTION :</strong></td>
+                        <td>{{ configuration.manutention }} €</td>
+                        <td></td>
+                    </tr> 
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"><strong>PRIX DE VENTE :</strong></td>
+                        <td>{{ configuration.getPrix }} €</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"><strong>COMISSION CB :</strong></td>
+                        <td>{{ configuration.commissionCB }}</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right"><strong>MARGE PC :</strong></td>
+                        <td>{{ configuration.margePC }} € ({{ configuration.margePCPourcent }} %)</td>
+                        <td class="text-left"><strong>MARGE COMPO. : </strong>{{ configuration.margeComposants }} ({{ configuration.margeComposantsPourcent }} %)</td>
+                    </tr>
+                </tbody> 
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

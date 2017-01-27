@@ -1,17 +1,17 @@
 {% extends "HBPCToolsBundle:Layouts:layout.html.twig" %}
 {% block title %}
-    Catégories - {{ parent() }}
+    Composants - {{ parent() }}
 {% endblock %}
 {% block hbpctools_body %}
 <div class="container">
     <div class="jumbotron">
-        <h1>Catégories</h1>
+        <h1>Composants</h1>
     </div>
     <div class="row">
-        <div id="content" class="col-md-12">
+        <div class="col-md-12">
             <h2>Liste</h2>
             <p>
-                <a href="{{ path('hbpc_tools_categories_new') }}">
+                <a href="{{ path('hbpc_tools_composants_new') }}">
                     <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
                 </a>
             </p>
@@ -22,31 +22,37 @@
                 </div>
             {% endfor %}
         </div>
-    </div>
     <div class="row">
-        <div id="content" class="col-md-12">
+        <div class="col-md-12">
             <table class="table table-striped"> 
                 <thead> 
                     <tr> 
                         <th>#</th> 
                         <th>Nom</th> 
+                        <th>Catégorie</th> 
+                        <th>Prix Achat TTC</th> 
+                        <th>Prix Vente TTC</th> 
                         <th>Actions</th> 
                     </tr> 
                 </thead> 
                 <tbody> 
-                    {% for cat in categories %}
+                    {% for compo in composants %}
                         <tr> 
-                            <th scope="row">{{ cat.id }}</th> 
-                            <td><a href="{{ path('hbpc_tools_categories_view', { 'id': cat.id }) }}">{{ cat.nom }}</a></td> 
+                            <th scope="row">{{ compo.id }}</th> 
+                            <td>{{ compo.nom }}</td> 
+                            <td>{{ compo.categorie.getNom }}</td> 
+                            <td>{{ compo.getPrixAchatTTC }}€</td> 
+                            <td>{{ compo.getPrixVenteTTC }}€</td> 
                             <td>
-                                <a href="{{ path('hbpc_tools_categories_remove', { 'id': cat.id }) }}">
-                                   <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></a>
+                                <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
                                 <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button>
                             </td> 
                         </tr> 
-                    {% else %}
+                        {% else %}
                             <tr>
-                                <th>Pas de catégories !</th>
+                                <th>Pas de composants !</th>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>

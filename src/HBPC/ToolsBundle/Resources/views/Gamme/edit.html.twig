@@ -1,0 +1,20 @@
+{% extends "HBPCToolsBundle:Layouts:layout.html.twig" %}
+{% block title %}
+    Editer une gamme - {{ parent() }}
+{% endblock %}
+{% block hbpctools_body %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>Configurations <small>Catégories</small></h1>
+    </div>
+    <div class="row">
+        <div id="content" class="col-md-12">
+            <h2>Editer une gamme</h2>
+            <a href="{{ app.request.headers.get('referer') }}"><button type="button" class="btn btn-primary"> << Retour</button></a>
+        </div>
+        <div id="content" class="col-md-12">
+            {{ include("HBPCToolsBundle:Gamme:form_gamme.html.twig") }}
+        </div>
+    </div>
+</div>
+{% endblock %}

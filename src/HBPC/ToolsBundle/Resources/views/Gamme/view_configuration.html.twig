@@ -5,7 +5,26 @@
 {% block hbpctools_body %}
 <div class="container">
     <div class="jumbotron">
-        <h1>Configurations</h1>
+        <h1>{{ categorie.nom }}</h1>
+    </div>
+    <div class="row">
+        <div id="content" class="col-md-12">
+            <h2>Configurations</h2>
+            <p>
+                <a href="{{ path('hbpc_tools_gamme') }}">
+                    <button type="button" class="btn btn-primary"> << Retour</button></a>
+                <a href="{{ path('hbpc_tools_gamme_edit', { 'id': categorie.id }) }}">
+                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Editer</button></a>
+                <a href="">
+                    <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer</button></a>
+            </p>
+            {% for message in app.session.flashbag.get('notice') %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     <div class="row">
         <div id="content" class="col-md-12">
@@ -22,7 +41,7 @@
                     {% for config in configurations %}
                         <tr> 
                             <th scope="row">{{ config.id }}</th> 
-                            <td><a href="{{ path('hbpc_tools_config_view', { 'id': config.id }) }}">{{ config.nom }}</a></td> 
+                            <td><a href="{{ path('hbpc_tools_configuration_view', { 'id': config.id }) }}">{{ config.nom }}</a></td> 
                             <td>{{ config.prix }}</td> 
                             <td>
                                 <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
@@ -31,7 +50,7 @@
                         </tr> 
                         {% else %}
                             <tr>
-                                <th>Pas de configurations !</th>
+                                <th>Pas de configurations dans cette catégorie!</th>
                                 <td></td>
                                 <td></td>
                                 <td></td>
