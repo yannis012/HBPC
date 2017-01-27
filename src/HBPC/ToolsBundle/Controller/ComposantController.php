@@ -92,6 +92,21 @@ class ComposantController extends Controller{
           ));
     }
     
+    public function augmenterStockAction($id, Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $composant = $em->getRepository('HBPCToolsBundle:Composant')->find($id);
+
+        if(null === $composant){
+            throw new NotFoundHttpException("Ce composant n'existe pas");
+        }
+        $stock = $composant->getStock() + 1;
+        $composant->setStock($stock);
+        $em->flush();
+
+        $request->getSession()->getFlashBag()->add('notice', 'Stock augmenté');
+        return $this->redirectToRoute('hbpc_tools_categorie_view', array('id' => $composant->getCategorie()->getId()));
+    } 
+    
     public function reduireStockAction($id, $config, Request $request){
         $em = $this->getDoctrine()->getManager();
         $composant = $em->getRepository('HBPCToolsBundle:Composant')->find($id);
@@ -104,6 +119,10 @@ class ComposantController extends Controller{
         $em->flush();
         
         $request->getSession()->getFlashBag()->add('notice', 'Stock réduit');
-        return $this->redirectToRoute('hbpc_tools_configuration_view', array('id' => $config));
+        if($config == 0){
+            return $this->redirectToRoute('hbpc_tools_categorie_view', array('id' => $composant->getCategorie()->getId()));
+        }else{
+            return $this->redirectToRoute('hbpc_tools_configuration_view', array('id' => $config));
+        }
     }
 }

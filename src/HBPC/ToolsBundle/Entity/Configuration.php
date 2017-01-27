@@ -49,11 +49,13 @@ class Configuration
      */
     private $prix;
     /**
-     * @ORM\Column(name="maj", type="boolean")
+     * @ORM\Column(name="maj", nullable=true, type="boolean", options={"default":0})
      */
     private $maj;
 
- 
+    public function margeAssemblage(){
+        return round($this->prix-$this->venteComposants()-$this->commissionCB()-$this->manutention(), 2);
+    }
     
     public function margePC(){
         return round($this->prix-$this->achatsComposants()-$this->commissionCB()-$this->manutention(), 2);
@@ -79,7 +81,7 @@ class Configuration
     }
     
     public function commissionCB(){
-        return $this->prix*0.008;
+        return round($this->prix*0.008, 2);
     }
     
     public function manutention(){

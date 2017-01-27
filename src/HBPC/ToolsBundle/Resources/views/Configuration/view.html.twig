@@ -13,8 +13,8 @@
             <p>
                 <a href="{{ path('hbpc_tools_gamme_view', { 'id': configuration.gamme.id} ) }}"><button type="button" class="btn btn-primary"> << Retour</button></a>
                 <a href="{{ path('hbpc_tools_configuration_add_composant', { 'id': configuration.id }) }}"><button type="button" class="btn btn-success"><span class="glyphicon glyphicon-cog"></span> Gérer les composants</button></a>
-                <a href=""><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Editer</button></a>
-                <a href=""><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer</button></a>
+                <a href="{{ path('hbpc_tools_configuration_edit', { 'id': configuration.id }) }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Editer</button></a>
+                <a href="{{ path('hbpc_tools_configuration_remove', { 'id': configuration.id }) }}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer</button></a>
             </p>
             {% for message in app.session.flashbag.get('notice') %}
                 <div class="alert alert-success alert-dismissible" role="alert">
@@ -22,6 +22,13 @@
                     <strong>{{ message }}</strong>
                 </div>
             {% endfor %}
+        {% if configuration.maj != 1 %}
+            <div class="alert alert-info alert-dismissible text-center">
+             <a href="{{ path('hbpc_tools_configuration_maj', { 'id': configuration.id }) }}">
+                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Valider la màj</button></a>
+            Cette configuration doit être mise à jour
+            </div>
+        {% endif %}
         </div>
     </div>
     <div class="row">
@@ -43,7 +50,7 @@
                         <tr> 
                             <th scope="row"><small>{{ compo.fournisseurRef }}</small></th> 
                             <td><small>{{ compo.reference }}</small></td> 
-                            <td>{{ compo.nom }}</td> 
+                            <th>{{ compo.nom }}</th> 
                             <td>{{ compo.getPrixAchatTTC }}€</td> 
                             <td>{{ compo.getPrixVenteTTC }}€</td> 
                             <td>
@@ -97,15 +104,22 @@
                         <td></td>
                         <td></td>
                         <td class="text-right"><strong>COMISSION CB :</strong></td>
-                        <td>{{ configuration.commissionCB }}</td>
+                        <td>{{ configuration.commissionCB }} €</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
+                        <td class="text-right"><strong>MARGE ASS. :</strong></td>
+                        <td>{{ configuration.margeAssemblage }} €</td>
+                        <td class="text-left"><strong>MARGE COMPO. : </strong>{{ configuration.margeComposants }} <br/>({{ configuration.margeComposantsPourcent }} %)</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
                         <td class="text-right"><strong>MARGE PC :</strong></td>
-                        <td>{{ configuration.margePC }} € ({{ configuration.margePCPourcent }} %)</td>
-                        <td class="text-left"><strong>MARGE COMPO. : </strong>{{ configuration.margeComposants }} ({{ configuration.margeComposantsPourcent }} %)</td>
+                        <td>{{ configuration.margePC }} € <br/>({{ configuration.margePCPourcent }} %)</td>
+                        <td></td>
                     </tr>
                 </tbody> 
             </table>

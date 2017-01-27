@@ -37,6 +37,7 @@
                         <th>Prix achat TTC</th> 
                         <th>Prix de vente TTC</th> 
                         <th>Marge TTC</th> 
+                        <th>Stock</th> 
                         <th>Actions</th> 
                     </tr> 
                 </thead> 
@@ -49,6 +50,18 @@
                             <td>{{ comp.getPrixVenteTTC }} €</td>
                             <td>{{ comp.getMargeTTC }}%</td>
                             <td>
+                                {% if comp.stock <= 0 %}
+                                    <font color="red">{{ comp.stock }}</font>
+                                {% elseif comp.stock < 2 %}
+                                    <font color="orange">{{ comp.stock }}</font>
+                                {% else %}
+                                    <font color="green">{{ comp.stock }}</font>
+                                {% endif %}</td>
+                            <td>
+                                <a href="{{ path('hbpc_tools_composant_hausse_stock', { 'id': comp.id }) }}">
+                                    <button type="button" class="btn btn-success" title="Augmenter le stock"><span class="glyphicon glyphicon-chevron-up"></span></button></a>
+                                <a href="{{ path('hbpc_tools_composant_baisse_stock', { 'id': comp.id, 'config': 0 }) }}">
+                                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-down"></span></button></a>
                                 <a href="{{ path('hbpc_tools_composant_edit', { 'id': comp.id }) }}">
                                     <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button></a>
                                 <a href="{{ path('hbpc_tools_composant_remove', { 'id': comp.id }) }}">

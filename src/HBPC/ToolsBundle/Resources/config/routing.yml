@@ -54,6 +54,12 @@ hbpc_tools_composant_baisse_stock:
         _controller: HBPCToolsBundle:Composant:reduireStock
     requirements:
         id: \d+
+hbpc_tools_composant_hausse_stock:
+    path:   /composant/{id}/augmenter-stock
+    defaults:
+        _controller: HBPCToolsBundle:Composant:augmenterStock
+    requirements:
+        id: \d+
         config: \d+
 hbpc_tools_gamme:
     path:     /gamme
@@ -79,6 +85,28 @@ hbpc_tools_configuration_view:
     path:     /config/{id}
     defaults: 
         _controller: HBPCToolsBundle:Configuration:viewConf
+    requirements:
+        id: \d+
+hbpc_tools_configuration_new:
+    path:     /config/add
+    defaults: 
+        _controller: HBPCToolsBundle:Configuration:add
+hbpc_tools_configuration_edit:
+    path:     /config/{id}/edit
+    defaults: 
+        _controller: HBPCToolsBundle:Configuration:edit
+    requirements:
+        id: \d+
+hbpc_tools_configuration_remove:
+    path:     /config/{id}/remove
+    defaults: 
+        _controller: HBPCToolsBundle:Configuration:remove
+    requirements:
+        id: \d+
+hbpc_tools_configuration_maj:
+    path:     /config/{id}/maj
+    defaults:
+        _controller: HBPCToolsBundle:Configuration:maj
     requirements:
         id: \d+
 hbpc_tools_configuration_add_composant:

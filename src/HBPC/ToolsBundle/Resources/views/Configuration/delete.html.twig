@@ -1,11 +1,11 @@
 {% extends "HBPCToolsBundle:Layouts:layout.html.twig" %}
 {% block title %}
-    Supprimer une catégorie - {{ parent() }}
+    Supprimer une configuration - {{ parent() }}
 {% endblock %}
 {% block hbpctools_body %}
 <div class="container">
     <div class="jumbotron">
-        <h1>Composants <small>Catégories</small></h1>
+        <h1>{{ config.nom }} <small>{{ config.reference }}</small></h1>
     </div>
     <div class="row">
         <div id="content" class="col-md-12">
@@ -14,11 +14,11 @@
         </div>
         <div id="content" class="col-md-12">
             <p>
-                Etes-vous certain de vouloir supprimer la catégorie "{{ cat.nom }}" ?
+                Etes-vous certain de vouloir supprimer la configuration "{{ config.nom }}" ?
             </p>
 
-          <form action="{{ path('hbpc_tools_categories_remove', {'id': cat.id}) }}" method="post">
-            <a href="{{ path('hbpc_tools_categories') }}">
+          <form action="{{ path('hbpc_tools_configuration_remove', {'id': config.id}) }}" method="post">
+            <a href="{{ app.request.headers.get('referer') }}">
                 <button type="button" class="btn btn-primary"> 
                     <i class="glyphicon glyphicon-chevron-left"></i>
                     Retour

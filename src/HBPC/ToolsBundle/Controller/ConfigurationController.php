@@ -8,6 +8,7 @@ use HBPC\ToolsBundle\Entity\Configuration;
 use Symfony\Component\HttpFoundation\Request;
 //Formulaire
 use HBPC\ToolsBundle\Form\ConfigAddCompType;
+use HBPC\ToolsBundle\Form\ConfigurationType;
 
 class ConfigurationController extends Controller{
     public function viewGammeAction($id)
@@ -36,6 +37,70 @@ class ConfigurationController extends Controller{
         return $this->render('HBPCToolsBundle:Configuration:view.html.twig', array('configuration' => $configuration));
     }
     
+    public function addAction(Request $request) {
+        $configuration = new Configuration();
+        
+        $form = $this->get('form.factory')->create(ConfigurationType::class, $configuration);
+        
+        if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($configuration);
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('notice', 'Configuration ajoutée.');
+            return $this->redirectToRoute('hbpc_tools_gamme_view', array(
+                'id' => $configuration->getGamme()->getId()
+            ));
+        }
+        return $this->render('HBPCToolsBundle:Configuration:add.html.twig', array(
+            'form' => $form->createView()
+                ));
+    }
+     
+    public function editAction($id, Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $configuration = $em->getRepository('HBPCToolsBundle:Configuration')->find($id);
+        
+        if(null === $configuration){
+            throw new NotFoundHttpException("Cette configuration n'existe pas");
+        }
+        
+        $form = $this->get('form.factory')->create(ConfigurationType::class, $configuration);
+        
+        if($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $configuration->setMaj(0);
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('notice', 'Configuration modifiée.');
+            return $this->redirectToRoute('hbpc_tools_configuration_view', array('id' => $configuration->getId()));
+        }
+        return $this->render('HBPCToolsBundle:Configuration:edit.html.twig', array(
+            'form' => $form->createView()
+            ));
+    }
+    
+    public function removeAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $configuration = $em->getRepository('HBPCToolsBundle:Configuration')->find($id);
+        
+        if (null === $configuration) {
+            throw new NotFoundHttpException("La configuration d'id ".$id." n'existe pas.");
+        }
+        
+        $form = $this->get('form.factory')->create();
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $gamme = $configuration->getGamme();
+            $em->remove($configuration);
+            //On exécute tout ça
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('notice', 'Configuration supprimée.');
+            return $this->redirectToRoute('hbpc_tools_gamme_view', array('id' => $gamme->getId()));
+        }
+        return $this->render('HBPCToolsBundle:Configuration:delete.html.twig', array(
+            'config' => $configuration,
+            'form'   => $form->createView(),
+          ));
+    }
+    
     public function addCompAction($id, Request $request){
         $em = $this->getDoctrine()->getManager();
         
@@ -48,6 +113,7 @@ class ConfigurationController extends Controller{
         $form = $this->createForm(ConfigAddCompType::class, $configuration);
         
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $configuration->setMaj(0);
             $em->persist($configuration);
             $em->flush();
             $request->getSession()->getFlashBag()->add('notice', 'Composant ajouté');
@@ -57,5 +123,20 @@ class ConfigurationController extends Controller{
             'form' => $form->createView(),
             'configuration' => $configuration
             ));
+    }
+    
+    public function majAction($id, Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $configuration = $em->getRepository('HBPCToolsBundle:Configuration')->find($id);
+        
+        if(null === $configuration){
+            throw new NotFoundHttpException("Cette configuration n'existe pas");
+        }
+        
+        $configuration->setMaj(1);
+        $em->flush();
+        
+        $request->getSession()->getFlashBag()->add('notice', 'Mise à jour validée');
+        return $this->redirectToRoute('hbpc_tools_configuration_view', array('id' => $configuration->getId()));
     }
 }

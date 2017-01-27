@@ -15,6 +15,8 @@
                     <button type="button" class="btn btn-primary"> << Retour</button></a>
                 <a href="{{ path('hbpc_tools_gamme_edit', { 'id': categorie.id }) }}">
                     <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Editer</button></a>
+                <a href="{{ path('hbpc_tools_configuration_new') }}">
+                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Ajouter une configuration</button></a>
                 <a href="">
                     <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer</button></a>
             </p>
@@ -34,6 +36,7 @@
                         <th>#</th> 
                         <th>Nom</th> 
                         <th>Prix de vente TTC</th> 
+                        <th>Màj ?</th>
                         <th>Actions</th> 
                     </tr> 
                 </thead> 
@@ -42,15 +45,29 @@
                         <tr> 
                             <th scope="row">{{ config.id }}</th> 
                             <td><a href="{{ path('hbpc_tools_configuration_view', { 'id': config.id }) }}">{{ config.nom }}</a></td> 
-                            <td>{{ config.prix }}</td> 
+                            <td>{{ config.prix }} €</td> 
                             <td>
-                                <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
-                                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button>
+                                {% if config.maj == 1 %}
+                                    <font color="green">OUI</font>
+                                {% else %}
+                                    <font color="red">NON</font>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if config.maj != 1 %}
+                                <a href="{{ path('hbpc_tools_configuration_maj', { 'id': config.id }) }}">
+                                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button></a>
+                                {% endif %}
+                                <a href="{{ path('hbpc_tools_configuration_edit', { 'id': config.id }) }}">
+                                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button></a>
+                                <a href="{{ path('hbpc_tools_configuration_remove', { 'id': config.id }) }}">
+                                    <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></a>
                             </td> 
                         </tr> 
                         {% else %}
                             <tr>
                                 <th>Pas de configurations dans cette catégorie!</th>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
