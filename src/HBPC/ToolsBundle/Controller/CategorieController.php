@@ -129,7 +129,13 @@ class CategorieController extends Controller{
                          ->getRepository('HBPCToolsBundle:Composant')
                     ;
         
-        return $composants = $repository->findBy(array('categorie' => $categorie));
+        return $composants = $repository->findBy(
+                array(
+                    'categorie' => $categorie
+                ),
+                array(
+                    'nom' => 'ASC'
+                ));
     }
     
 }

@@ -22,6 +22,7 @@ class Composant
     /**
      * @ORM\ManyToOne(targetEntity="HBPC\ToolsBundle\Entity\Categorie", inversedBy="composants")
      * @ORM\JoinColumn(nullable=false)
+     * @ORM\OrderBy({"position" = "asc"})
      */
     private $categorie;
     

@@ -23,7 +23,8 @@ class ConfigAddCompType extends AbstractType
                     'class' => 'HBPCToolsBundle:Composant',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('c')
-                            ->orderBy('c.categorie', 'ASC');
+                            ->orderBy('c.categorie', 'ASC')
+                            ->addOrderBy('c.nom', 'ASC');
                     },
                     'choice_label' => 'nom',
                     'group_by' => 'categorie.nom',

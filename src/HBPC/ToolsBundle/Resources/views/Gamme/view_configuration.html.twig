@@ -55,8 +55,8 @@
                             </td>
                             <td>
                                 {% if config.maj != 1 %}
-                                <a href="{{ path('hbpc_tools_configuration_maj', { 'id': config.id }) }}">
-                                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button></a>
+                                    <a href="{{ path('hbpc_tools_configuration_maj', { 'id': config.id }) }}">
+                                        <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button></a>
                                 {% endif %}
                                 <a href="{{ path('hbpc_tools_configuration_edit', { 'id': config.id }) }}">
                                     <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button></a>

@@ -4,10 +4,12 @@ namespace HBPC\ToolsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 // Import des entités :
 use HBPC\ToolsBundle\Entity\Configuration;
+use HBPC\ToolsBundle\Entity\Composant;
 //Gestion du Request
 use Symfony\Component\HttpFoundation\Request;
 //Formulaire
 use HBPC\ToolsBundle\Form\ConfigAddCompType;
+use HBPC\ToolsBundle\Form\ConfigAddCompTestType;
 use HBPC\ToolsBundle\Form\ConfigurationType;
 
 class ConfigurationController extends Controller{
@@ -105,7 +107,7 @@ class ConfigurationController extends Controller{
         $em = $this->getDoctrine()->getManager();
         
         $configuration = $em->getRepository('HBPCToolsBundle:Configuration')->find($id);
-        
+
         if (null === $configuration) {
             throw new NotFoundHttpException("Cette config n'existe pas");
         }

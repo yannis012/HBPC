@@ -36,8 +36,8 @@
             <table class="table table-striped"> 
                 <thead> 
                     <tr> 
+                        <th>Fourn.</th> 
                         <th>Réf. F.</th> 
-                        <th>Réf.</th> 
                         <th>Nom</th> 
                         <th>Prix Achat TTC</th> 
                         <th>Prix Vente TTC</th> 
@@ -48,8 +48,8 @@
                 <tbody> 
                     {% for compo in configuration.composants %}
                         <tr> 
-                            <th scope="row"><small>{{ compo.fournisseurRef }}</small></th> 
-                            <td><small>{{ compo.reference }}</small></td> 
+                            <th scope="row"><small>{{ compo.fournisseur }}</small></th> 
+                            <td><small>{{ compo.fournisseurRef }}</small></td> 
                             <th>{{ compo.nom }}</th> 
                             <td>{{ compo.getPrixAchatTTC }}€</td> 
                             <td>{{ compo.getPrixVenteTTC }}€</td> 
