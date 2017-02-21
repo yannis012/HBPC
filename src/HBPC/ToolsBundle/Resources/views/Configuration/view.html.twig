@@ -3,7 +3,7 @@
     {{ configuration.nom }} - {{ parent() }}
 {% endblock %}
 {% block hbpctools_body %}
-<div class="container">
+<div class="container-fluid">
     <div class="jumbotron">
         <h1>{{ configuration.nom }} <small>{{ configuration.reference }}</small></h1>
     </div>
@@ -38,6 +38,7 @@
                     <tr> 
                         <th>Fourn.</th> 
                         <th>Réf. F.</th> 
+                        <th>Réf. C.</th> 
                         <th>Nom</th> 
                         <th>Prix Achat TTC</th> 
                         <th>Prix Vente TTC</th> 
@@ -49,7 +50,8 @@
                     {% for compo in configuration.composants %}
                         <tr> 
                             <th scope="row"><small>{{ compo.fournisseur }}</small></th> 
-                            <td><small>{{ compo.fournisseurRef }}</small></td> 
+                            <td><input type="text" size="5" value="{{ compo.fournisseurRef }}" readonly onClick="this.select();"/></td> 
+                            <td><input type="text" size="5" value="{{ compo.reference }}" readonly onClick="this.select();"/></td> 
                             <th>{{ compo.nom }}</th> 
                             <td>{{ compo.getPrixAchatTTC }}€</td> 
                             <td>{{ compo.getPrixVenteTTC }}€</td> 

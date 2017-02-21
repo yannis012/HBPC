@@ -3,7 +3,7 @@
     Composants > {{ categorie.nom }} - {{ parent() }}
 {% endblock %}
 {% block hbpctools_body %}
-<div class="container">
+<div class="container-fluid">
     <div class="jumbotron">
         <h1>Composants <small>{{ categorie.nom }}</small></h1>
     </div>
@@ -32,9 +32,10 @@
             <table class="table table-striped"> 
                 <thead> 
                     <tr> 
-                        <th>#</th> 
+                        <th>Réf. F.</th> 
+                        <th>Fournisseur</th> 
                         <th>Nom</th> 
-                        <th>Prix achat TTC</th> 
+                        <th>Prix achat HT</th> 
                         <th>Prix de vente TTC</th> 
                         <th>Marge TTC</th> 
                         <th>Stock</th> 
@@ -44,9 +45,10 @@
                 <tbody> 
                     {% for comp in composants %}
                         <tr> 
-                            <th scope="row">{{ comp.id }}</th> 
-                            <td><a href="">{{ comp.nom }}</a></td> 
-                            <td>{{ comp.getPrixAchatTTC }} €</td>
+                            <th><input type="text" size="5" value="{{ comp.fournisseurRef }}" readonly onClick="this.select();"/></th> 
+                            <td>{{ comp.fournisseur }}</td> 
+                            <th>{{ comp.nom }}</th> 
+                            <td>{{ comp.getPrixAchat }} €</td>
                             <td>{{ comp.getPrixVenteTTC }} €</td>
                             <td>{{ comp.getMargeTTC }}%</td>
                             <td>

@@ -36,6 +36,7 @@
                         <th>#</th> 
                         <th>Nom</th> 
                         <th>Prix de vente TTC</th> 
+                        <th>Marge</th> 
                         <th>Màj ?</th>
                         <th>Actions</th> 
                     </tr> 
@@ -46,6 +47,17 @@
                             <th scope="row">{{ config.id }}</th> 
                             <td><a href="{{ path('hbpc_tools_configuration_view', { 'id': config.id }) }}">{{ config.nom }}</a></td> 
                             <td>{{ config.prix }} €</td> 
+                            <td>
+                                {% if config.margePCPourcent <= 8 %}
+                                    <font color="red">
+                                        {{ config.margePCPourcent }}%
+                                    </font>
+                                {% else %}
+                                    <font color="green">
+                                        {{ config.margePCPourcent }}%
+                                    </font>
+                                {% endif %}
+                            </td>
                             <td>
                                 {% if config.maj == 1 %}
                                     <font color="green">OUI</font>
@@ -67,6 +79,7 @@
                         {% else %}
                             <tr>
                                 <th>Pas de configurations dans cette catégorie!</th>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
